@@ -87,6 +87,7 @@ def _set_traffic(resource_group: str, app: str, weights: dict[str, int]) -> None
             "--name", app,
             "--revision-weight",
             *[f"{revision}={weight}" for revision, weight in weights.items()],
+            "--output", "none",
         ],
         check=True,
     )
@@ -101,6 +102,7 @@ def _set_label(resource_group: str, app: str, revision: str, label: str) -> None
             "--revision", revision,
             "--label", label,
             "--yes",
+            "--output", "none",
         ],
         check=True,
     )
