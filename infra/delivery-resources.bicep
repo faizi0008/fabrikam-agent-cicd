@@ -22,7 +22,6 @@ resource registry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   properties: {
     adminUserEnabled: false
     publicNetworkAccess: 'Enabled'
-    networkRuleSet: { defaultAction: 'Allow' }
   }
 }
 
@@ -52,6 +51,7 @@ resource foundry 'Microsoft.CognitiveServices/accounts@2026-05-01' = {
 
 resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2026-05-01' = {
   parent: foundry
+  dependsOn: [ modelDeployment ]
   name: foundryProjectName
   location: location
   identity: { type: 'SystemAssigned' }
