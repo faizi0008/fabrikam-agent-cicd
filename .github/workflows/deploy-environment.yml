@@ -45,6 +45,7 @@ jobs:
       TARGET_ENVIRONMENT: ${{ github.event_name == 'push' && 'development' || inputs.environment }}
       SOURCE_COMMIT: ${{ github.event_name == 'push' && github.sha || inputs.source_commit }}
       GH_TOKEN: ${{ github.token }}
+      PYTHONPATH: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v4
         with:
