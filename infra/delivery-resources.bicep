@@ -100,6 +100,12 @@ resource dashboard 'Microsoft.App/containerApps@2024-03-01' = {
     managedEnvironmentId: containerEnvironment.id
     configuration: {
       activeRevisionsMode: 'Multiple'
+      registries: [
+        {
+          server: registry.properties.loginServer
+          identity: 'system'
+        }
+      ]
       ingress: {
         external: true
         targetPort: 8000
