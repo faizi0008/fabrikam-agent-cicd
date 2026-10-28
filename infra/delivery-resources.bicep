@@ -156,6 +156,16 @@ resource githubPushRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = i
   }
 }
 
+resource githubFoundryRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(githubPrincipalId)) {
+  name: guid(foundry.id, githubPrincipalId, foundryUserRole)
+  scope: foundry
+  properties: {
+    principalId: githubPrincipalId
+    principalType: 'ServicePrincipal'
+    roleDefinitionId: foundryUserRole
+  }
+}
+
 output registryName string = registry.name
 output registryEndpoint string = registry.properties.loginServer
 output foundryProjectId string = foundryProject.id
