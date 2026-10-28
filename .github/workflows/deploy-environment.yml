@@ -74,6 +74,8 @@ jobs:
           test "$(jq -r .reviewed_release_id artifacts/staging-verified/release-set.json)" = "$(jq -r .reviewed_release_id artifacts/validation/release-set.json)"
       - name: Install Foundry agents azd extension
         run: azd extension install azure.ai.agents --source azd --version 1.0.0-beta.22
+      - name: Use Azure CLI credentials for azd
+        run: azd config set auth.useAzCliAuth true
       - name: Select isolated azd environment
         run: |
           AZURE_DEV_USER_AGENT=microsoft_foundry_skill azd env select "${{ vars.AZURE_ENV_NAME }}" || AZURE_DEV_USER_AGENT=microsoft_foundry_skill azd env new "${{ vars.AZURE_ENV_NAME }}" --no-prompt
